@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<phrases>
+  <phrase title="wh1_BtcPay_errors_you_must_provide_all_data" version_id="1000070" version_string="1.0.0"><![CDATA[You must provide all data!]]></phrase>
+  <phrase title="wh1_btcpay_amount_due" version_id="1000170" version_string="1.0.1"><![CDATA[Amount due]]></phrase>
+  <phrase title="wh1_btcpay_api_key" version_id="1000070" version_string="1.0.0"><![CDATA[Api key]]></phrase>
+  <phrase title="wh1_btcpay_api_key_explain" version_id="1000070" version_string="1.0.0"><![CDATA[Required api key permissions: <strong>View invoices</strong> (btcpay.store.canviewinvoices), <strong>Create an invoice</strong> (btcpay.store.cancreateinvoice).]]></phrase>
+  <phrase title="wh1_btcpay_base_url" version_id="1000070" version_string="1.0.0"><![CDATA[Base url]]></phrase>
+  <phrase title="wh1_btcpay_base_url_explain" version_id="1000070" version_string="1.0.0"><![CDATA[The primary URL to BtcPay. Do not include a trailing "/" or "index.php". The URL should look similar to this: <strong>https://btcpay.example.com</strong>]]></phrase>
+  <phrase title="wh1_btcpay_bwh1_address" version_id="1000170" version_string="1.0.1"><![CDATA[BTC address]]></phrase>
+  <phrase title="wh1_btcpay_callback_url_explain" version_id="1000070" version_string="1.0.0"><![CDATA[You'll need to set up a Notification URL in your BtcPay store settings with the URL above. Event: <strong>"An invoice has been settled"</strong>. ]]></phrase>
+  <phrase title="wh1_btcpay_check_payment" version_id="1000170" version_string="1.0.1"><![CDATA[Check payment]]></phrase>
+  <phrase title="wh1_btcpay_errors_invoice_expired" version_id="1000170" version_string="1.0.1"><![CDATA[Invoice expired]]></phrase>
+  <phrase title="wh1_btcpay_errors_you_must_provide_all_data" version_id="1000170" version_string="1.0.1"><![CDATA[You must provide all data!]]></phrase>
+  <phrase title="wh1_btcpay_expiring_at" version_id="1000170" version_string="1.0.1"><![CDATA[Expiring at]]></phrase>
+  <phrase title="wh1_btcpay_expiring_in" version_id="1000170" version_string="1.0.1"><![CDATA[Expiring in]]></phrase>
+  <phrase title="wh1_btcpay_secret_key" version_id="1000070" version_string="1.0.0"><![CDATA[Webhook secret key]]></phrase>
+  <phrase title="wh1_btcpay_store_id" version_id="1000070" version_string="1.0.0"><![CDATA[Store id]]></phrase>
+  <phrase title="wh1_btcpay_type" version_id="1000170" version_string="1.0.1"><![CDATA[Payment page type]]></phrase>
+  <phrase title="wh1_btcpay_type_internal" version_id="1000170" version_string="1.0.1"><![CDATA[Internal]]></phrase>
+  <phrase title="wh1_btcpay_type_redirect" version_id="1000170" version_string="1.0.1"><![CDATA[Redirect]]></phrase>
+  <phrase title="wh1_btcpay_type_widget" version_id="1000170" version_string="1.0.1"><![CDATA[Widget]]></phrase>
+  <phrase title="wh1_btcpay_use_widget" version_id="1000070" version_string="1.0.0"><![CDATA[Use overlay widget]]></phrase>
+  <phrase title="wh1_pg_btcpay_crypto_currency.btc" version_id="1000270" version_string="1.0.2"><![CDATA[Bitcoin]]></phrase>
+</phrases>

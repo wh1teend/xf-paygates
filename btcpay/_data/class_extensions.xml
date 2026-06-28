@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<class_extensions>
+  <extension from_class="XF\Data\Currency" to_class="WH1\PaygateBtcPay\XF\Data\Currency" execute_order="25" active="1"/>
+</class_extensions>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+  <template type="admin" title="payment_profile_wh1BtcPay" version_id="1000170" version_string="1.0.1"><![CDATA[<xf:textboxrow name="options[base_url]" value="{$profile.options.base_url}"
+			   label="{{ phrase('wh1_btcpay_base_url') }}"
+			   explain="{{ phrase('wh1_btcpay_base_url_explain') }}"
+			   hint="{{ phrase('required') }}">
+</xf:textboxrow>
+
+<xf:textboxrow name="options[api_key]" value="{$profile.options.api_key}"
+			   label="{{ phrase('wh1_btcpay_api_key') }}"
+			   explain="{{ phrase('wh1_btcpay_api_key_explain') }}"
+			   hint="{{ phrase('required') }}">
+</xf:textboxrow>
+
+<xf:textboxrow name="options[store_id]" value="{$profile.options.store_id}"
+			   label="{{ phrase('wh1_btcpay_store_id') }}"
+			   hint="{{ phrase('required') }}">
+</xf:textboxrow>
+
+<xf:radiorow label="{{ phrase('wh1_btcpay_type') }}" name="options[type]" 
+			 value="{{ $profile.options.type ?: 'redirect' }}">
+	<xf:option value="redirect">{{ phrase('wh1_btcpay_type_redirect') }}</xf:option>
+	<xf:option value="widget" disabled="true">{{ phrase('wh1_btcpay_type_widget') }} (DO NOT USE, WORK IN PROGRESS)</xf:option>
+	<xf:option value="internal">{{ phrase('wh1_btcpay_type_internal') }}</xf:option>
+</xf:radiorow>
+
+<hr class="formRowSep" />
+
+<xf:textboxrow name="options[secret_key]" value="{$profile.options.secret_key}"
+			   label="{{ phrase('wh1_btcpay_secret_key') }}"
+			   hint="{{ phrase('required') }}">
+</xf:textboxrow>
+
+<xf:formrow explain="{{ phrase('wh1_btcpay_callback_url_explain') }}">
+	<code class="js-copyTarget">{$profile.getPaymentHandler().getCallbackUrl()}</code>
+	<xf:button icon="copy"
+			   data-xf-init="copy-to-clipboard"
+			   data-copy-target=".js-copyTarget"
+			   data-success="{{ phrase('link_copied_to_clipboard') }}"
+			   class="button--link is-hidden" />
+</xf:formrow>]]></template>
+  <template type="public" title="wh1_payment_initiate_btcpay" version_id="1000070" version_string="1.0.0"><![CDATA[<xf:js src="{$baseUrl}/modal/btcpay.js" />
+
+<xf:js>
+$(document).ready(function () {
+	window.btcpay.showInvoice("{{ $invoiceId|escape('js') }}");
+	
+	window.btcpay.onModalReceiveMessage(function (event) {
+		if(event.data.status == "complete")
+		{
+			window.location.replace("{{ $returnUrl|escape('js') }}");
+		}
+	});
+	
+	XF.hideOverlays();
+});
+</xf:js>]]></template>
+  <template type="public" title="wh1_payment_initiate_btcpay_internal" version_id="1000370" version_string="1.0.3"><![CDATA[<xf:title>{{ phrase('confirm_payment_details') }}</xf:title>
+
+<xf:js src="tc/btcpay/vendor/qrcode.min.js" />
+<xf:js dev="tc/btcpay/qr-code.js" min="1" />
+<xf:js dev="tc/btcpay/status.js" min="1" />
+
+<xf:form action="{{ link('purchase/process', null, {'request_key': $purchaseRequest.request_key}) }}" class="block"
+		 data-xf-init="btcpay-status">
+	<div class="block-container">
+		<div class="block-body">		
+			
+			<xf:formrow label="{{ phrase('wh1_btcpay_btc_address') }}">
+				<a href="{$invoicePayment.paymentLink}" 
+				   class="btcpay-copyDestination">
+					{$invoicePayment.destination}
+				</a>
+				
+				<xf:button icon="copy"
+						   data-xf-init="copy-to-clipboard"
+						   data-copy-text="{$invoicePayment.destination}"
+						   data-success="{{ phrase('link_copied_to_clipboard') }}"
+						   class="button--plain" />
+			</xf:formrow>
+			
+			<xf:formrow label="{{ phrase('cost') }}">
+				<span class="btcpay-copyAmount">{$invoicePayment.amount|currency('BTC')}</span>
+				<xf:button icon="copy"
+						   data-xf-init="copy-to-clipboard"
+						   data-copy-text="{$invoicePayment.amount}"
+						   data-success="{{ phrase('link_copied_to_clipboard') }}"
+						   class="button--plain" />
+			</xf:formrow>
+			
+			<xf:if is="$invoicePayment.due != $invoicePayment.amount">			
+				<xf:formrow label="{{ phrase('wh1_btcpay_amount_due') }}">
+					<span class="btcpay-copyAmountDue">{$invoicePayment.due|currency('BTC')}</span>
+					<xf:button icon="copy"
+							   data-xf-init="copy-to-clipboard"
+							   data-copy-text="{$invoicePayment.due}"
+							   data-success="{{ phrase('link_copied_to_clipboard') }}"
+							   class="button--plain" />
+				</xf:formrow>
+			</xf:if>
+			
+			<xf:formrow>
+				<span data-xf-init="btcpay-qr-code" data-text="{$invoicePayment.paymentLink}" />
+			</xf:formrow>
+			
+			<xf:formrow label="{{ phrase('wh1_btcpay_expiring_at') }}">
+				<xf:date time="{$invoice.expirationTime}" format="full" />
+			</xf:formrow>
+			
+			<xf:formrow label="{{ phrase('status') }}">{{ $invoice.status }}</xf:formrow>
+			
+			<xf:submitrow icon="refresh" submit="{{ phrase('wh1_btcpay_check_payment') }}" />
+		</div>
+	</div>
+</xf:form>]]></template>
+</templates>
